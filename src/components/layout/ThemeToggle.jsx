@@ -28,7 +28,7 @@ export default function ThemeToggle() {
         checked={isDark}
         onChange={() => setTheme(isDark ? "light" : "dark")}
       />
-      <div className="relative w-[80px] h-[36px] bg-slate-100 dark:bg-zinc-700 border border-slate-200 dark:border-zinc-600 peer-checked:bg-zinc-500 rounded-full after:absolute after:content-[''] after:w-[28px] after:h-[28px] after:bg-gradient-to-r after:from-orange-500 after:to-yellow-400 peer-checked:after:from-zinc-900 peer-checked:after:to-zinc-900 after:rounded-full after:top-[3px] after:left-[4px] active:after:w-[34px] peer-checked:after:left-[76px] peer-checked:after:translate-x-[-100%] shadow-sm duration-300 after:duration-300 after:shadow-md" />
+      <div className="relative w-[80px] h-[36px] bg-slate-100 dark:bg-zinc-700 border border-slate-200 dark:border-zinc-600 peer-checked:bg-zinc-500 rounded-full after:absolute after:content-[''] after:w-[28px] after:h-[28px] after:bg-gradient-to-r after:from-orange-500 after:to-yellow-400 peer-checked:after:from-blue-600 peer-checked:after:to-blue-600 after:rounded-full after:top-[3px] after:left-[4px] active:after:w-[34px] peer-checked:after:left-[76px] peer-checked:after:translate-x-[-100%] shadow-sm duration-300 after:duration-300 after:shadow-md" />
       {/* Sun Icon */}
       <svg
         height="18"

@@ -36,8 +36,8 @@ const user = {
 
 const Navbar = () => {
   return (
-    <nav className="sticky top-3 z-50 w-full my-3 container mx-auto px-3">
-      <div className="relative rounded-full shadow-md border border-slate-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
+    <nav className="fixed top-3 left-0 right-0 z-50 w-full px-3">
+      <div className="container mx-auto relative rounded-full shadow-md border border-slate-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
         <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link href="/">
@@ -125,7 +125,10 @@ const Navbar = () => {
               >
                 <Bars className="size-5" />
               </Button>
-              <Dropdown.Popover className="min-w-55">
+              <Dropdown.Popover
+                className="min-w-55 z-9999!"
+                shouldCloseOnScroll={false}
+              >
                 <Dropdown.Menu>
                   {isLoggedIn && (
                     <>

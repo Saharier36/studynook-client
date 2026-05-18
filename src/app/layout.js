@@ -1,3 +1,4 @@
+import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
 
 export const metadata = {
@@ -14,7 +15,10 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col container mx-auto">
+        <Navbar/>
+        {children}
+      </body>
     </html>
   );
 }

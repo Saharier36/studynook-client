@@ -25,8 +25,9 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import NavLink from "../ui/NavLink";
+import ThemeToggle from "./ThemeToggle";
 
-const isLoggedIn = false;
+const isLoggedIn = true;
 
 const user = {
   name: "X",
@@ -36,11 +37,11 @@ const user = {
 const Navbar = () => {
   return (
     <nav className="sticky top-3 z-50 w-full my-3 container mx-auto px-3">
-      <div className="relative rounded-full shadow-md border border-slate-200 bg-white/80 backdrop-blur-md">
+      <div className="relative rounded-full shadow-md border border-slate-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
         <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link href="/">
-            <div className="flex items-center gap-2 text-xl font-bold text-[#072AC8]">
+            <div className="flex items-center gap-2 text-xl font-bold text-[#072AC8] dark:text-blue-400">
               <Image
                 src="/assets/logo.png"
                 alt="StudyNook Logo"
@@ -52,30 +53,21 @@ const Navbar = () => {
           </Link>
 
           {/*Links */}
-          <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
-            <NavLink href="/" className="hover:text-[#072AC8]">
-              Home
-            </NavLink>
-            <NavLink href="/rooms" className="hover:text-[#072AC8]">
-              Rooms
-            </NavLink>
+          <div className="hidden lg:flex items-center gap-6 text-sm font-medium">
+            <NavLink href="/">Home</NavLink>
+            <NavLink href="/rooms">Rooms</NavLink>
             {isLoggedIn && (
               <>
-                <NavLink href="/add-rooms" className="hover:text-[#072AC8]">
-                  Add Room
-                </NavLink>
-                <NavLink href="/my-listings" className="hover:text-[#072AC8]">
-                  My Listings
-                </NavLink>
-                <NavLink href="/my-bookings" className="hover:text-[#072AC8]">
-                  My Bookings
-                </NavLink>
+                <NavLink href="/add-rooms">Add Room</NavLink>
+                <NavLink href="/my-listings">My Listings</NavLink>
+                <NavLink href="/my-bookings">My Bookings</NavLink>
               </>
             )}
           </div>
 
           {/* Action Buttons */}
-          <div className="hidden lg:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-3">
+            <ThemeToggle />
             {isLoggedIn ? (
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
@@ -85,13 +77,13 @@ const Navbar = () => {
                       {user.name.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </AvatarRoot>
-                  <span className="text-sm font-medium text-slate-700">
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     {user.name}
                   </span>
                 </div>
                 <Button
                   size="sm"
-                  className="flex items-center gap-1 bg-[#072AC8] hover:bg-[#1E96FC]"
+                  className="flex items-center gap-1 bg-[#072AC8] hover:bg-[#1E96FC] dark:bg-blue-400 dark:hover:bg-blue-500"
                   // TODO: better-auth signOut()
                 >
                   <ArrowRightFromSquare className="size-4" />
@@ -104,13 +96,16 @@ const Navbar = () => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="hover:text-[#072AC8]"
+                    className="hover:text-[#072AC8] dark:hover:text-blue-400 text-slate-700 dark:text-slate-300 border-none"
                   >
                     Login
                   </Button>
                 </Link>
                 <Link href="/sign-up">
-                  <Button size="sm" className="bg-[#072AC8] hover:bg-[#1E96FC]">
+                  <Button
+                    size="sm"
+                    className="bg-[#072AC8] hover:bg-[#1E96FC] dark:bg-blue-500 dark:hover:bg-blue-600"
+                  >
                     Sign Up
                   </Button>
                 </Link>
@@ -119,10 +114,16 @@ const Navbar = () => {
           </div>
 
           {/* small device */}
-          <div className="lg:hidden flex items-center">
+          <div className="lg:hidden flex items-center gap-2">
+            <ThemeToggle />
             <Dropdown>
-              <Button isIconOnly aria-label="Menu" variant="ghost">
-                <Bars className="size-5 text-slate-700" />
+              <Button
+                isIconOnly
+                aria-label="Menu"
+                variant="ghost"
+                className="text-slate-700 dark:text-slate-300 border-none"
+              >
+                <Bars className="size-5" />
               </Button>
               <Dropdown.Popover className="min-w-55">
                 <Dropdown.Menu>

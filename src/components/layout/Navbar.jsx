@@ -35,7 +35,7 @@ const user = {
 
 const Navbar = () => {
   return (
-    <nav className="sticky top-0 z-50 w-full my-3">
+    <nav className="sticky top-3 z-50 w-full my-3 container mx-auto px-3">
       <div className="relative rounded-full shadow-md border border-slate-200 bg-white/80 backdrop-blur-md">
         <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
@@ -91,7 +91,7 @@ const Navbar = () => {
                 </div>
                 <Button
                   size="sm"
-                  className="flex items-center gap-1 bg-[#072AC8]"
+                  className="flex items-center gap-1 bg-[#072AC8] hover:bg-[#1E96FC]"
                   // TODO: better-auth signOut()
                 >
                   <ArrowRightFromSquare className="size-4" />
@@ -101,12 +101,16 @@ const Navbar = () => {
             ) : (
               <>
                 <Link href="/login">
-                  <Button variant="ghost" size="sm">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="hover:text-[#072AC8]"
+                  >
                     Login
                   </Button>
                 </Link>
                 <Link href="/sign-up">
-                  <Button size="sm" className="bg-[#072AC8]">
+                  <Button size="sm" className="bg-[#072AC8] hover:bg-[#1E96FC]">
                     Sign Up
                   </Button>
                 </Link>

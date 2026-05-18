@@ -8,17 +8,15 @@ import {
   FaXTwitter,
   FaLinkedinIn,
   FaInstagram,
-  FaEnvelope,
-  FaPhone,
 } from "react-icons/fa6";
 import { Button } from "@heroui/react";
-import { MapPin } from "@gravity-ui/icons";
+import { Envelope, Handset, MapPin } from "@gravity-ui/icons";
 
 const isLoggedIn = true;
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#072AC8] text-white relative mt-auto pt-16 pb-8 overflow-hidden rounded-t-4xl ">
+    <footer className="bg-[#072AC8] text-white mt-auto pt-16 pb-8">
       <div className="px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div className="space-y-5">
@@ -98,7 +96,6 @@ const Footer = () => {
                 </Link>
               </li>
 
-              {/* Private Routes merged inside Useful Links grid when logged in */}
               {isLoggedIn && (
                 <>
                   <li>
@@ -150,7 +147,7 @@ const Footer = () => {
                   className="flex items-center gap-3 text-white/80 hover:text-white"
                 >
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/10">
-                    <FaEnvelope className="size-4" />
+                    <Envelope className="size-4" />
                   </div>
                   <span className="hover:underline">info@studynook.com</span>
                 </Link>
@@ -161,7 +158,7 @@ const Footer = () => {
                   className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group"
                 >
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/10">
-                    <FaPhone className="size-4" />
+                    <Handset className="size-4" />
                   </div>
                   <span className="hover:underline">+1 (555) 019-2834</span>
                 </Link>
@@ -185,10 +182,7 @@ const Footer = () => {
             with passion for seamless learning.
           </p>
           <div className="flex gap-6 text-xs text-white/60">
-            <Link
-              href="/privacy"
-              className="hover:text-white hover:underline"
-            >
+            <Link href="/privacy" className="hover:text-white hover:underline">
               Privacy Policy
             </Link>
             <Link href="/terms" className="hover:text-white hover:underline">

@@ -17,9 +17,9 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
       </head>
-      <body className="min-h-full flex flex-col container mx-auto px-4 md:px-6">
+      <body className="min-h-full flex flex-col overflow-x-hidden">
         <Navbar />
-        <main className="flex-grow w-full flex flex-col">
+        <main>
           {children}
         </main>
         <Footer />

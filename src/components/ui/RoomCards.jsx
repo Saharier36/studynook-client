@@ -6,7 +6,7 @@ import Link from "next/link";
 const RoomCards = ({ rooms }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-      {rooms.map((room) => {
+      {rooms.map((room, i) => {
         const {
           _id,
           title,
@@ -19,8 +19,8 @@ const RoomCards = ({ rooms }) => {
         } = room;
 
         return (
-          <AnimatedCard key={_id}>
-            <div className="h-full flex flex-col bg-white dark:bg-zinc-900 rounded-xl overflow-hidden shadow-lg ">
+          <AnimatedCard key={_id} index={i}>
+            <div className="h-full flex flex-col bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden shadow-lg ">
               <div className="flex flex-col h-full ">
                 <div className="relative w-full h-48 overflow-hidden bg-slate-100 dark:bg-zinc-800 shrink-0">
                   <Image

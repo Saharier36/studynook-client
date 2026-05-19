@@ -8,7 +8,7 @@ import { CircleCheck, Lock } from "@gravity-ui/icons";
 
 const Hero = () => {
   return (
-    <section className="relative w-full -mt-26 pt-26">
+    <section className="relative w-full -mt-26 pt-26 overflow-hidden">
       {/* Bg Image */}
       <Image
         src="/assets/banner.jpg"

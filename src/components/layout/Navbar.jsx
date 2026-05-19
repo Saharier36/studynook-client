@@ -36,7 +36,7 @@ const user = {
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-3 left-0 right-0 z-50 w-full px-3">
+    <nav className="fixed top-3 left-0 right-0 z-50 px-3">
       <div className="container mx-auto relative rounded-full shadow-md border border-slate-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
         <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}

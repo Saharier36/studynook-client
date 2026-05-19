@@ -2,6 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
 import { Providers } from "./providers";
+import { Toaster } from "sonner";
 
 export const metadata = {
   title: "StudyNook - Library Study Room Booking",
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-full flex flex-col overflow-x-hidden">
         <Providers>
+          <Toaster richColors position="top-right" />
           <Navbar />
           <main className="pt-20">{children}</main>
           <Footer />

@@ -10,8 +10,8 @@ export default function AnimatedCard({ children, index = 0 }) {
       viewport={{ once: true, margin: "-40px" }}
       transition={{ 
         duration: 0.6, 
-        delay: (index % 3) * 0.1, // Smooth column-based stagger wave for 3-column desktop layout
-        ease: [0.215, 0.61, 0.355, 1] // Premium fluid cubic-bezier curve
+        delay: (index % 3) * 0.1,
+        ease: [0.215, 0.61, 0.355, 1]
       }}
       whileHover={{ y: -6, scale: 1.01 }}
       className="h-full"

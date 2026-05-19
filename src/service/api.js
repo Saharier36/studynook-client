@@ -3,3 +3,9 @@ export const fetchRooms = async () => {
   const data = await res.json();
   return data || [];
 };
+
+export const featuredRooms = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/featured-rooms`);
+  const data = await res.json();
+  return data || [];
+};

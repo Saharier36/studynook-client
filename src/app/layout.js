@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col overflow-x-hidden">
         <Providers>
           <Navbar />
-          <main>{children}</main>
+          <main className="pt-20">{children}</main>
           <Footer />
         </Providers>
       </body>

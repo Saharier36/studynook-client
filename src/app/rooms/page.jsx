@@ -61,8 +61,8 @@ const RoomsPage = async () => {
                         fill
                         className="object-cover transition-transform duration-500 hover:scale-105"
                       />
-                      <Chip className="absolute top-3 right-3 bg-slate-950/80 text-white">
-                        <span className="text-yellow-400">${price}</span>
+                      <Chip className="absolute top-3 right-3 bg-slate-50 dark:bg-slate-950/80 dark:text-white ">
+                        <span className="text-blue-600 dark:text-yellow-400">${price}</span>
                         /hr
                       </Chip>
                     </div>
@@ -89,7 +89,7 @@ const RoomsPage = async () => {
                       </p>
 
                       <div className="flex flex-wrap gap-1.5 mb-5 items-center">
-                        {amenities.map((amenity, i) => (
+                        {amenities.slice(0, 3).map((amenity, i) => (
                           <span
                             key={i}
                             className="bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-slate-300 font-semibold px-2.5 py-0.5 rounded text-sm"
@@ -97,6 +97,13 @@ const RoomsPage = async () => {
                             {amenity}
                           </span>
                         ))}
+                        {amenities.length > 3 && (
+                          <span
+                            className="bg-slate-100 dark:bg-zinc-700 text-slate-700 dark:text-slate-200 font-semibold px-2.5 py-0.5 rounded text-sm"
+                          >
+                            +{amenities.length - 3} more
+                          </span>
+                        )}
                       </div>
 
                       <div className="mt-auto">

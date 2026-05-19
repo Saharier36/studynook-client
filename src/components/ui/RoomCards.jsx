@@ -1,5 +1,5 @@
 import Image from "next/image";
-import AnimatedCard from "../Framer-Motion/AnimatedCard";
+import AnimatedCard from "../framer-motion/AnimatedCard";
 import { Button, Chip } from "@heroui/react";
 import Link from "next/link";
 

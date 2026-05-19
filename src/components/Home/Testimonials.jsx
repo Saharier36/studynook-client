@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "@heroui/react";
-import AnimatedCard from "@/components/Framer-Motion/AnimatedCard";
+import AnimatedCard from "@/components/framer-motion/AnimatedCard";
 import { FaStar } from "react-icons/fa6";
 
 const testimonialsData = [

@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Card } from "@heroui/react";
-import AnimatedCard from "@/components/Framer-Motion/AnimatedCard";
+import AnimatedCard from "@/components/framer-motion/AnimatedCard";
 
 const overviewData = [
   {

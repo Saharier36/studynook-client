@@ -1,7 +1,7 @@
-import FeaturedCard from "@/components/Home/Featured";
-import Hero from "@/components/Home/Hero";
-import Overview from "@/components/Home/Overview";
-import Testimonials from "@/components/Home/Testimonials";
+import FeaturedCard from "@/components/home/Featured";
+import Hero from "@/components/home/Hero";
+import Overview from "@/components/home/Overview";
+import Testimonials from "@/components/home/Testimonials";
 
 export default function Home() {
   return (

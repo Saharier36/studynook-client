@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@heroui/react";
-import IconMotion from "../Framer-Motion/IconMotion";
+import IconMotion from "../framer-motion/IconMotion";
 import { BiVolumeMute } from "react-icons/bi";
 import { CircleCheck, Lock } from "@gravity-ui/icons";
 

@@ -11,10 +11,10 @@ import {
 } from "react-icons/fa6";
 import { Button } from "@heroui/react";
 import { Envelope, Handset, MapPin } from "@gravity-ui/icons";
-
-const isLoggedIn = true;
+import { useSession } from "@/lib/auth-client";
 
 const Footer = () => {
+  const { data: session } = useSession();
   return (
     <footer className="bg-[#072AC8] text-white mt-auto pt-16 pb-8">
       <div className="px-6 lg:px-8">
@@ -96,7 +96,7 @@ const Footer = () => {
                 </Link>
               </li>
 
-              {isLoggedIn && (
+              {session && (
                 <>
                   <li>
                     <Link

@@ -33,7 +33,7 @@ import { useSession, signOut } from "@/lib/auth-client";
 const Navbar = () => {
   const router = useRouter();
   const { data: session, isPending } = useSession();
-  console.log(session);
+
   const handleLogout = async () => {
     await signOut({
       fetchOptions: {

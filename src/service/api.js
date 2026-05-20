@@ -15,3 +15,15 @@ export const featuredRooms = async () => {
   const data = await res.json();
   return data || [];
 };
+
+export const addRooms = async (roomData) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/rooms`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(roomData),
+  });
+  const data = await res.json();
+  return data;
+};

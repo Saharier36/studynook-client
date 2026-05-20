@@ -23,12 +23,19 @@ const RoomCards = ({ rooms }) => {
             <div className="h-full flex flex-col bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden shadow-lg ">
               <div className="flex flex-col h-full ">
                 <div className="relative w-full h-48 overflow-hidden bg-slate-100 dark:bg-zinc-800 shrink-0">
-                  <Image
-                    src={image}
-                    alt={title}
-                    fill
-                    className="object-cover transition-transform duration-500 hover:scale-105"
-                  />
+                  {image ? (
+                    <Image
+                      src={image}
+                      alt={title}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-slate-400 dark:text-slate-500">
+                      <span className="text-sm">No image available</span>
+                    </div>
+                  )}
+
                   <Chip className="absolute top-3 right-3 bg-slate-50 dark:bg-slate-950/80 dark:text-white ">
                     <span className="text-blue-600 dark:text-yellow-400">
                       ${price}

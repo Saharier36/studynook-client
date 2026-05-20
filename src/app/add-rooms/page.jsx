@@ -34,11 +34,8 @@ const AddRoomsPage = () => {
     const roomData = Object.fromEntries(formData.entries());
     roomData.amenities = selectedAmenities;
 
-    roomData.owner = {
-      id: session?.user?.id,
-      name: session?.user?.name,
-      email: session?.user?.email,
-    };
+    const { id, name, email, image } = session?.user || {};
+    roomData.owner = { id, name, email, image };
 
     const result = await addRooms(roomData);
     if (result) {

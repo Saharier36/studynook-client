@@ -1,7 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button, Chip, Card } from "@heroui/react";
+import {
+  Button,
+  Chip,
+  Card,
+  AvatarRoot,
+  AvatarImage,
+  AvatarFallback,
+} from "@heroui/react";
 import { fetchRoomDetails } from "@/service/api";
 import {
   FaBuilding,
@@ -34,8 +41,8 @@ const RoomDetails = async ({ params }) => {
     owner,
   } = room;
 
-    const isLoggedIn = !!session?.user;
-    const isOwner = session?.user?.id === owner?.id;
+  const isLoggedIn = !!session?.user;
+  const isOwner = session?.user?.id === owner?.id;
 
   return (
     <main className="min-h-screen pb-10">
@@ -103,16 +110,28 @@ const RoomDetails = async ({ params }) => {
                   </div>
                 </div>
 
-                <div className="p-5 bg-slate-50 dark:bg-zinc-800/40 rounded-2xl border border-slate-100 dark:border-zinc-800/80 max-w-md">
-                  <span className="text-xs font-extrabold uppercase text-[#072AC8] dark:text-blue-400 block mb-1">
-                    Space Owner
-                  </span>
-                  <h4 className="text-base font-bold text-slate-800 dark:text-white">
-                    {owner?.name}
-                  </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    {owner?.email}
-                  </p>
+                <div className="p-5 bg-slate-50 dark:bg-zinc-800/40 rounded-2xl border border-slate-100 dark:border-zinc-800/80 max-w-md flex items-center gap-4">
+                  <AvatarRoot size="md">
+                    <AvatarImage
+                      referrerPolicy="no-referrer"
+                      src={owner?.image || ""}
+                      alt={owner?.name || "Owner"}
+                    />
+                    <AvatarFallback>
+                      {owner?.name?.charAt(0).toUpperCase() || "U"}
+                    </AvatarFallback>
+                  </AvatarRoot>
+                  <div>
+                    <span className="text-xs font-extrabold uppercase text-[#072AC8] dark:text-blue-400 block mb-1">
+                      Space Owner
+                    </span>
+                    <h4 className="text-base font-bold text-slate-800 dark:text-white">
+                      {owner?.name}
+                    </h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                      {owner?.email}
+                    </p>
+                  </div>
                 </div>
               </div>
 

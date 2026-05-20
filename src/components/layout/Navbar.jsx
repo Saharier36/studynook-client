@@ -83,8 +83,11 @@ const Navbar = () => {
                 className="text-[#072AC8] dark:text-blue-400"
               />
             ) : session ? (
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2">
+              <Dropdown>
+                <Button
+                  variant="ghost"
+                  className="flex items-center gap-2 p-1.5 rounded-full border border-slate-200 dark:border-zinc-800 hover:bg-slate-100 dark:hover:bg-zinc-900"
+                >
                   <AvatarRoot size="sm">
                     <AvatarImage
                       referrerPolicy="no-referrer"
@@ -92,27 +95,67 @@ const Navbar = () => {
                       alt={session.user.name}
                     />
                     <AvatarFallback>
-                      {session.user.name.charAt(0).toUpperCase()}
+                      {session.user.name?.charAt(0).toUpperCase() || "U"}
                     </AvatarFallback>
                   </AvatarRoot>
-                  <div>
-                    <p className="text-sm font-medium text-slate-700 dark:text-slate-300 ">
-                      {session.user.name}
-                    </p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      {session.user.email}
-                    </p>
-                  </div>
-                </div>
-                <Button
-                  size="sm"
-                  className="flex items-center gap-1 bg-[#072AC8] hover:bg-[#1E96FC] dark:bg-blue-400 dark:hover:bg-blue-500"
-                  onClick={handleLogout}
-                >
-                  <ArrowRightFromSquare className="size-4" />
-                  Logout
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300 pr-2">
+                    {session.user.name}
+                  </span>
                 </Button>
-              </div>
+                <Dropdown.Popover
+                  className="min-w-56 z-9999!"
+                  shouldCloseOnScroll={false}
+                >
+                  <Dropdown.Menu>
+                    <Dropdown.Section>
+                      <Header>
+                        <div className="flex flex-col py-1 px-1">
+                          <span className="text-xs text-slate-400 dark:text-zinc-500">Signed in as</span>
+                          <span className="text-sm font-semibold text-slate-700 dark:text-slate-200 truncate">
+                            {session.user.name}
+                          </span>
+                          <span className="text-xs text-slate-400 dark:text-zinc-500 truncate">
+                            {session.user.email}
+                          </span>
+                        </div>
+                      </Header>
+                    </Dropdown.Section>
+                    <Separator />
+                    <Dropdown.Section>
+                      <Dropdown.Item href="/my-listings">
+                        <div className="flex items-center gap-2">
+                          <LayoutList className="size-4 shrink-0 text-muted" />
+                          <Label>My Listings</Label>
+                        </div>
+                      </Dropdown.Item>
+                      <Dropdown.Item href="/my-bookings">
+                        <div className="flex items-center gap-2">
+                          <BookOpen className="size-4 shrink-0 text-muted" />
+                          <Label>My Bookings</Label>
+                        </div>
+                      </Dropdown.Item>
+                      <Dropdown.Item href="/add-rooms">
+                        <div className="flex items-center gap-2">
+                          <SquarePlus className="size-4 shrink-0 text-muted" />
+                          <Label>Add Room</Label>
+                        </div>
+                      </Dropdown.Item>
+                    </Dropdown.Section>
+                    <Separator />
+                    <Dropdown.Section>
+                      <Dropdown.Item variant="danger">
+                        <button
+                          onClick={handleLogout}
+                          className="flex items-center gap-2 w-full text-left bg-transparent border-none cursor-pointer focus:outline-none"
+                        >
+                          <ArrowRightFromSquare className="size-4 shrink-0 text-danger" />
+                          <Label className="cursor-pointer">Logout</Label>
+                        </button>
+                      </Dropdown.Item>
+                    </Dropdown.Section>
+                  </Dropdown.Menu>
+                </Dropdown.Popover>
+              </Dropdown>
             ) : (
               <>
                 <Link href="/login">
@@ -176,7 +219,7 @@ const Navbar = () => {
                                     alt={session.user.name}
                                   />
                                   <AvatarFallback>
-                                    {session.user.name.charAt(0).toUpperCase()}
+                                    {session.user.name?.charAt(0).toUpperCase() || "U"}
                                   </AvatarFallback>
                                 </AvatarRoot>
                                 <div>
@@ -237,10 +280,10 @@ const Navbar = () => {
                             <Dropdown.Item variant="danger">
                               <button
                                 onClick={handleLogout}
-                                className="flex items-center gap-2"
+                                className="flex items-center gap-2 w-full text-left bg-transparent border-none cursor-pointer focus:outline-none"
                               >
                                 <ArrowRightFromSquare className="size-4 shrink-0 text-danger" />
-                                <Label>Logout</Label>
+                                <Label className="cursor-pointer">Logout</Label>
                               </button>
                             </Dropdown.Item>
                           </Dropdown.Section>

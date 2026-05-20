@@ -18,11 +18,13 @@ import { toast } from "sonner";
 import { ArrowLeft, Plus } from "@gravity-ui/icons";
 import Link from "next/link";
 import { addRooms } from "@/service/api";
+import { useSession } from "@/lib/auth-client";
 
 const AddRoomsPage = () => {
   const router = useRouter();
   const [selectedAmenities, setSelectedAmenities] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { data: session } = useSession();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +33,12 @@ const AddRoomsPage = () => {
     const formData = new FormData(e.currentTarget);
     const roomData = Object.fromEntries(formData.entries());
     roomData.amenities = selectedAmenities;
+
+    roomData.owner = {
+      id: session?.user?.id,
+      name: session?.user?.name,
+      email: session?.user?.email,
+    };
 
     const result = await addRooms(roomData);
     if (result) {

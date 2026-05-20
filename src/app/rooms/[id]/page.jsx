@@ -9,12 +9,18 @@ import {
   FaCalendarCheck,
   FaArrowLeft,
 } from "react-icons/fa6";
-
-const isLoggedIn = true;
-const isOwner = true;
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import EditRooms from "@/components/ui/EditRooms";
+import DeleteRooms from "@/components/ui/DeleteRooms";
 
 const RoomDetails = async ({ params }) => {
   const { id } = await params;
+
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
   const room = await fetchRoomDetails(id);
   const {
     title,
@@ -27,6 +33,9 @@ const RoomDetails = async ({ params }) => {
     bookingCount,
     owner,
   } = room;
+
+    const isLoggedIn = !!session?.user;
+    const isOwner = session?.user?.id === owner?.id;
 
   return (
     <main className="min-h-screen pb-10">
@@ -166,12 +175,8 @@ const RoomDetails = async ({ params }) => {
                       Admin Space Controls
                     </span>
                     <div className="flex items-center gap-4">
-                      <Button className="bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-800 dark:text-slate-200 font-extrabold rounded-xl border border-slate-200/60 dark:border-zinc-700/80">
-                        Edit Room
-                      </Button>
-                      <Button variant="danger" className=" font-extrabold rounded-xl">
-                        Delete Room
-                      </Button>
+                      <EditRooms room={room} />
+                      <DeleteRooms room={room} />
                     </div>
                   </div>
                 )}

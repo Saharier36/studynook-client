@@ -27,3 +27,26 @@ export const addRooms = async (roomData) => {
   const data = await res.json();
   return data;
 };
+
+export const updateRoom = async (_id, roomData) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/rooms/${_id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(roomData),
+  });
+  const data = await res.json();
+  return data;
+};
+
+export const deleteRoom = async (_id) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/rooms/${_id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+  return data;
+};

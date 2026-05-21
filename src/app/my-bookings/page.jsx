@@ -35,9 +35,16 @@ const MyBookings = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-extrabold text-[#072AC8] dark:text-blue-400 mb-8">
-        My Bookings
-      </h1>
+      <div className="mb-8 space-y-2">
+        <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl">
+          My{" "}
+          <span className="text-[#072AC8] dark:text-blue-400">Bookings</span>
+        </h1>
+        <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 font-medium">
+          View and manage all your upcoming and past study room reservations.
+          Cancel or track your booking status anytime.
+        </p>
+      </div>
 
       <Table className="min-h-50">
         <Table.ResizableContainer>
@@ -129,8 +136,7 @@ const MyBookings = () => {
                   </Table.Cell>
 
                   <Table.Cell>
-                    {booking.status === "confirmed" &&
-                    new Date(booking.date) > new Date() ? (
+                    {booking.status === "confirmed" ? (
                       <CancelBooking
                         onConfirm={() => handleCancel(booking._id)}
                       />

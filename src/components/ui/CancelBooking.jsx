@@ -6,7 +6,7 @@ const CancelBooking = ({ onConfirm }) => {
   return (
     <Modal>
       <Modal.Trigger>
-        <button className="text-sm font-semibold text-red-500 hover:text-red-700">
+        <button className="font-semibold text-red-500 cursor-pointer">
           Cancel
         </button>
       </Modal.Trigger>
@@ -35,7 +35,7 @@ const CancelBooking = ({ onConfirm }) => {
               <Button
                 slot="close"
                 onPress={onConfirm}
-                className="bg-red-500 hover:bg-red-600 rounded-xl px-6"
+                className="bg-red-500 hover:bg-red-600 rounded-xl "
               >
                 Cancel
               </Button>

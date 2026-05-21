@@ -20,6 +20,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import EditRooms from "@/components/ui/EditRooms";
 import DeleteRooms from "@/components/ui/DeleteRooms";
+import BookingRooms from "@/components/ui/BookingRooms";
 
 const RoomDetails = async ({ params }) => {
   const { id } = await params;
@@ -150,9 +151,7 @@ const RoomDetails = async ({ params }) => {
                   </div>
 
                   {isLoggedIn ? (
-                    <Button className="w-full bg-[#072AC8] hover:bg-[#1E96FC] text-white font-extrabold py-6 rounded-xl">
-                      Book This Nook
-                    </Button>
+                    <BookingRooms room={room} />
                   ) : (
                     <Link href="/login" className="w-full">
                       <Button className="w-full bg-slate-850 hover:bg-slate-900 dark:bg-zinc-800 dark:hover:bg-zinc-700 font-extrabold py-6 rounded-xl">

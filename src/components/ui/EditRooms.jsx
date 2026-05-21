@@ -169,14 +169,13 @@ const EditRooms = ({ room }) => {
                     </div>
 
                     {/* Amenities */}
-                    <div className="space-y-2">
+                    <div>
                       <Label className="text-sm font-semibold">Amenities</Label>
                       <CheckboxGroup
                         value={selectedAmenities}
                         onChange={setSelectedAmenities}
-                        className="mt-2"
                       >
-                        <div className="grid sm:grid-cols-2 gap-3">
+                        <div className="grid sm:grid-cols-2 sm:gap-3">
                           {[
                             "Whiteboard",
                             "Projector",

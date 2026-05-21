@@ -127,14 +127,13 @@ const AddRoomsPage = () => {
           </div>
 
           {/* Amenities */}
-          <div className="space-y-2">
+          <div>
             <Label className="text-sm font-semibold">Amenities</Label>
             <CheckboxGroup
               value={selectedAmenities}
               onChange={setSelectedAmenities}
-              className="mt-2"
             >
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-3">
                 {[
                   "Whiteboard",
                   "Projector",

@@ -50,3 +50,34 @@ export const deleteRoom = async (_id) => {
   const data = await res.json();
   return data;
 };
+
+export const bookings = async (bookingData) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/booking`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bookingData),
+  });
+  return res;
+};
+
+export const getBookings = async (userId) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/bookings?userId=${userId}`,
+  );
+  const data = await res.json();
+  return data;
+};
+
+export const cancelBooking = async (bookingId, userId) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/booking/${bookingId}/cancel`,
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId }),
+    },
+  );
+  return res;
+};

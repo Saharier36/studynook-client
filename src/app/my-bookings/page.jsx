@@ -1,0 +1,157 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { Chip, EmptyState, Table } from "@heroui/react";
+import Image from "next/image";
+import { toast } from "sonner";
+import { useSession } from "@/lib/auth-client";
+import { cancelBooking, getBookings } from "@/service/api";
+import CancelBooking from "@/components/ui/CancelBooking";
+
+const MyBookings = () => {
+  const { data: session } = useSession();
+  const user = session?.user;
+
+  const [bookings, setBookings] = useState([]);
+
+  useEffect(() => {
+    if (user?.id) {
+      getBookings(user.id).then((data) => setBookings(data));
+    }
+  }, [user]);
+
+  const handleCancel = async (id) => {
+    const res = await cancelBooking(id, user.id);
+
+    if (res.ok) {
+      toast.success("Booking cancelled");
+      setBookings((prev) =>
+        prev.map((b) => (b._id === id ? { ...b, status: "cancelled" } : b)),
+      );
+    } else {
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 py-10">
+      <h1 className="text-3xl font-extrabold text-[#072AC8] dark:text-blue-400 mb-8">
+        My Bookings
+      </h1>
+
+      <Table className="min-h-[200px]">
+        <Table.ResizableContainer>
+          <Table.Content aria-label="My Bookings" className="min-w-[800px]">
+            <Table.Header>
+              <Table.Column isRowHeader defaultWidth="2fr" minWidth={200}>
+                Room
+                <Table.ColumnResizer />
+              </Table.Column>
+              <Table.Column defaultWidth="1fr" minWidth={120}>
+                Date
+                <Table.ColumnResizer />
+              </Table.Column>
+              <Table.Column defaultWidth="1fr" minWidth={160}>
+                Time
+                <Table.ColumnResizer />
+              </Table.Column>
+              <Table.Column defaultWidth="1fr" minWidth={120}>
+                Total Cost
+                <Table.ColumnResizer />
+              </Table.Column>
+              <Table.Column defaultWidth="1fr" minWidth={120}>
+                Status
+                <Table.ColumnResizer />
+              </Table.Column>
+              <Table.Column defaultWidth="1fr" minWidth={100}>
+                Action
+              </Table.Column>
+            </Table.Header>
+
+            <Table.Body
+              renderEmptyState={() => (
+                <EmptyState className="flex h-full w-full flex-col items-center justify-center gap-4 text-center py-16">
+                  <span className="text-sm text-muted">
+                    You have no bookings yet.
+                  </span>
+                </EmptyState>
+              )}
+            >
+              {bookings.map((booking) => (
+                <Table.Row key={booking._id}>
+                  {/* Room */}
+                  <Table.Cell>
+                    <div className="flex items-center gap-3">
+                      <Image
+                        src={booking.roomImage}
+                        alt={booking.roomTitle}
+                        width={48}
+                        height={48}
+                        className="rounded-lg object-cover"
+                      />
+                      <span className="font-semibold text-sm">
+                        {booking.roomTitle}
+                      </span>
+                    </div>
+                  </Table.Cell>
+
+                  {/* Date */}
+                  <Table.Cell>
+                    <span className="text-sm">
+                      {new Date(booking.date).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </Table.Cell>
+
+                  {/* Time */}
+                  <Table.Cell>
+                    <span className="text-sm">
+                      {booking.startTime} → {booking.endTime}
+                    </span>
+                  </Table.Cell>
+
+                  {/* Total Cost */}
+                  <Table.Cell>
+                    <span className="font-bold text-[#072AC8] dark:text-blue-400">
+                      ${booking.totalPrice}
+                    </span>
+                  </Table.Cell>
+
+                  {/* Status */}
+                  <Table.Cell>
+                    <Chip
+                      color={
+                        booking.status === "confirmed" ? "success" : "danger"
+                      }
+                      size="sm"
+                      variant="soft"
+                    >
+                      {booking.status}
+                    </Chip>
+                  </Table.Cell>
+
+                  {/* Action */}
+                  <Table.Cell>
+                    {booking.status === "confirmed" &&
+                    new Date(booking.date) > new Date() ? (
+                      <CancelBooking
+                        onConfirm={() => handleCancel(booking._id)}
+                      />
+                    ) : (
+                      <span className="text-sm text-muted">—</span>
+                    )}
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table.Content>
+        </Table.ResizableContainer>
+      </Table>
+    </div>
+  );
+};
+
+export default MyBookings;

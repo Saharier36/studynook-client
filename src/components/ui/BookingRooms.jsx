@@ -21,6 +21,7 @@ import { ChevronDown } from "@gravity-ui/icons";
 import { useSession } from "@/lib/auth-client";
 import { bookings } from "@/service/api";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const BookingRooms = ({ room }) => {
   const { _id, title, image, price } = room;
@@ -44,13 +45,13 @@ const BookingRooms = ({ room }) => {
 
   const { data: session } = useSession();
   const user = session?.user;
+  const router = useRouter();
 
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [specialNote, setSpecialNote] = useState("");
   const [date, setDate] = useState(null);
 
-  // 1. Dynamic Hourly Price Calculation
   const totalPrice = useMemo(() => {
     if (!startTime || !endTime || !price) return 0;
 
@@ -79,7 +80,7 @@ const BookingRooms = ({ room }) => {
       date: date ? new Date(date).toISOString() : new Date().toISOString(),
       startTime,
       endTime,
-      totalPrice, // Database-e updated dynamic price push hobe
+      totalPrice,
       specialNote,
     };
 
@@ -92,6 +93,7 @@ const BookingRooms = ({ room }) => {
       return;
     }
     toast.success("Room booked successfully!");
+    router.refresh();
   };
 
   return (
@@ -124,7 +126,6 @@ const BookingRooms = ({ room }) => {
                     }}
                     className="space-y-6"
                   >
-                    {/* Date */}
                     <DatePicker
                       className="w-full"
                       name="date"
@@ -179,15 +180,13 @@ const BookingRooms = ({ room }) => {
                       </DatePicker.Popover>
                     </DatePicker>
 
-                    {/* Time Slots */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      {/* Start Time Select */}
                       <Select
                         selectedKeys={startTime ? [startTime] : []}
                         onSelectionChange={(keys) => {
                           const value = String(Array.from(keys)[0] || "");
                           setStartTime(value);
-                          setEndTime(""); // reset end time
+                          setEndTime("");
                         }}
                         isRequired
                         name="startTime"
@@ -212,7 +211,6 @@ const BookingRooms = ({ room }) => {
                         </Select.Popover>
                       </Select>
 
-                      {/* End Time Select */}
                       <Select
                         selectedKeys={endTime ? [endTime] : []}
                         onSelectionChange={(keys) => {
@@ -249,7 +247,6 @@ const BookingRooms = ({ room }) => {
                       </Select>
                     </div>
 
-                    {/* Total Cost Display */}
                     <div className="flex items-center justify-between rounded-2xl bg-[#EBF3FF] dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900/30 p-3">
                       <span className="text-xs font-bold uppercase text-[#072AC8] dark:text-blue-400">
                         Total Cost
@@ -259,7 +256,6 @@ const BookingRooms = ({ room }) => {
                       </p>
                     </div>
 
-                    {/* Special Note */}
                     <TextField name="specialNote">
                       <Label className="text-sm font-semibold">
                         Special Note

@@ -106,7 +106,9 @@ const RoomDetails = async ({ params }) => {
                       Popularity Rate
                     </span>
                     <h4 className="text-base font-extrabold text-slate-800 dark:text-white -mt-0.5">
-                      Booked {bookingCount} Times
+                      {bookingCount > 0
+                        ? `Booked ${bookingCount} ${bookingCount === 1 ? "Time" : "Times"}`
+                        : "Not Booked Yet"}
                     </h4>
                   </div>
                 </div>

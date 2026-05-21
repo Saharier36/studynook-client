@@ -39,9 +39,9 @@ const MyBookings = () => {
         My Bookings
       </h1>
 
-      <Table className="min-h-[200px]">
+      <Table className="min-h-50">
         <Table.ResizableContainer>
-          <Table.Content aria-label="My Bookings" className="min-w-[800px]">
+          <Table.Content aria-label="My Bookings" className="min-w-200">
             <Table.Header>
               <Table.Column isRowHeader defaultWidth="2fr" minWidth={200}>
                 Room
@@ -79,7 +79,6 @@ const MyBookings = () => {
             >
               {bookings.map((booking) => (
                 <Table.Row key={booking._id}>
-                  {/* Room */}
                   <Table.Cell>
                     <div className="flex items-center gap-3">
                       <Image
@@ -95,7 +94,6 @@ const MyBookings = () => {
                     </div>
                   </Table.Cell>
 
-                  {/* Date */}
                   <Table.Cell>
                     <span className="text-sm">
                       {new Date(booking.date).toLocaleDateString("en-GB", {
@@ -106,21 +104,18 @@ const MyBookings = () => {
                     </span>
                   </Table.Cell>
 
-                  {/* Time */}
                   <Table.Cell>
                     <span className="text-sm">
                       {booking.startTime} → {booking.endTime}
                     </span>
                   </Table.Cell>
 
-                  {/* Total Cost */}
                   <Table.Cell>
                     <span className="font-bold text-[#072AC8] dark:text-blue-400">
                       ${booking.totalPrice}
                     </span>
                   </Table.Cell>
 
-                  {/* Status */}
                   <Table.Cell>
                     <Chip
                       color={
@@ -133,7 +128,6 @@ const MyBookings = () => {
                     </Chip>
                   </Table.Cell>
 
-                  {/* Action */}
                   <Table.Cell>
                     {booking.status === "confirmed" &&
                     new Date(booking.date) > new Date() ? (

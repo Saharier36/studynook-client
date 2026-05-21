@@ -40,6 +40,7 @@ const BookingRooms = ({ room }) => {
     "19:00",
     "20:00",
   ];
+  const getHour = (time) => Number(time.split(":")[0]);
 
   const { data: session } = useSession();
   const user = session?.user;
@@ -49,35 +50,36 @@ const BookingRooms = ({ room }) => {
   const [specialNote, setSpecialNote] = useState("");
   const [date, setDate] = useState(null);
 
+  // 1. Dynamic Hourly Price Calculation
   const totalPrice = useMemo(() => {
-    if (!startTime || !endTime) return 0;
-    const start = Number(startTime.split(":")[0]);
-    const end = Number(endTime.split(":")[0]);
-    if (end <= start) return 0;
-    return (end - start) * price;
+    if (!startTime || !endTime || !price) return 0;
+
+    const [sh, sm] = startTime.split(":").map(Number);
+    const [eh, em] = endTime.split(":").map(Number);
+
+    const startMinutes = sh * 60 + sm;
+    const endMinutes = eh * 60 + em;
+
+    const diff = endMinutes - startMinutes;
+
+    if (diff <= 0) return 0;
+
+    return (diff / 60) * Number(price);
   }, [startTime, endTime, price]);
 
   const handleBooking = async () => {
-    const start = Number(startTime.split(":")[0]);
-    const end = Number(endTime.split(":")[0]);
-
-    if (end <= start) {
-      toast.error("End time must be after start time");
-      return;
-    }
-
     const bookingData = {
-      userId: user.id,
-      userImage: user.image,
-      userName: user.name,
-      userEmail: user.email,
+      userId: user?.id,
+      userImage: user?.image,
+      userName: user?.name,
+      userEmail: user?.email,
       roomTitle: title,
       roomImage: image,
       roomId: _id,
-      date: new Date(date).toISOString(),
+      date: date ? new Date(date).toISOString() : new Date().toISOString(),
       startTime,
       endTime,
-      totalPrice,
+      totalPrice, // Database-e updated dynamic price push hobe
       specialNote,
     };
 
@@ -89,7 +91,6 @@ const BookingRooms = ({ room }) => {
       );
       return;
     }
-
     toast.success("Room booked successfully!");
   };
 
@@ -180,11 +181,13 @@ const BookingRooms = ({ room }) => {
 
                     {/* Time Slots */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      {/* Start Time */}
+                      {/* Start Time Select */}
                       <Select
+                        selectedKeys={startTime ? [startTime] : []}
                         onSelectionChange={(keys) => {
-                          setStartTime(Array.from(keys)[0]);
-                          setEndTime("");
+                          const value = String(Array.from(keys)[0] || "");
+                          setStartTime(value);
+                          setEndTime(""); // reset end time
                         }}
                         isRequired
                         name="startTime"
@@ -192,10 +195,12 @@ const BookingRooms = ({ room }) => {
                         <Label className="text-sm font-semibold">
                           Start Time
                         </Label>
+
                         <Select.Trigger className="mt-1 rounded-xl border border-slate-200 dark:border-zinc-800 w-full">
                           <Select.Value placeholder="Select start time" />
                           <ChevronDown className="size-4 text-slate-400" />
                         </Select.Trigger>
+
                         <Select.Popover>
                           <ListBox>
                             {timeSlots.map((time) => (
@@ -207,30 +212,33 @@ const BookingRooms = ({ room }) => {
                         </Select.Popover>
                       </Select>
 
-                      {/* End Time */}
+                      {/* End Time Select */}
                       <Select
-                        onSelectionChange={(keys) =>
-                          setEndTime(Array.from(keys)[0])
-                        }
+                        selectedKeys={endTime ? [endTime] : []}
+                        onSelectionChange={(keys) => {
+                          const value = String(Array.from(keys)[0] || "");
+                          setEndTime(value);
+                        }}
                         isRequired
                         name="endTime"
+                        isDisabled={!startTime}
                       >
                         <Label className="text-sm font-semibold">
                           End Time
                         </Label>
+
                         <Select.Trigger className="mt-1 rounded-xl border border-slate-200 dark:border-zinc-800 w-full">
                           <Select.Value placeholder="Select end time" />
                           <ChevronDown className="size-4 text-slate-400" />
                         </Select.Trigger>
+
                         <Select.Popover>
                           <ListBox>
                             {(startTime
                               ? timeSlots.filter(
-                                  (time) =>
-                                    Number(time.split(":")[0]) >
-                                    Number(startTime.split(":")[0]),
+                                  (time) => getHour(time) > getHour(startTime),
                                 )
-                              : []
+                              : timeSlots
                             ).map((time) => (
                               <ListBox.Item key={time} id={time}>
                                 {time}
@@ -241,13 +249,13 @@ const BookingRooms = ({ room }) => {
                       </Select>
                     </div>
 
-                    {/* Total Cost */}
+                    {/* Total Cost Display */}
                     <div className="flex items-center justify-between rounded-2xl bg-[#EBF3FF] dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900/30 p-3">
                       <span className="text-xs font-bold uppercase text-[#072AC8] dark:text-blue-400">
                         Total Cost
                       </span>
                       <p className="text-3xl font-extrabold text-[#072AC8] dark:text-blue-400">
-                        ${totalPrice}
+                        ${totalPrice || price}
                       </p>
                     </div>
 

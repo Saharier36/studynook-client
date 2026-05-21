@@ -83,3 +83,14 @@ export const cancelBooking = async (bookingId, userId) => {
   );
   return res;
 };
+
+export const getMyListings = async (userId) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/my-listings?userId=${userId}`,
+    {
+      cache: "no-store",
+    },
+  );
+
+  return await res.json();
+};

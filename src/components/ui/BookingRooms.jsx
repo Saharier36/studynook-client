@@ -43,6 +43,8 @@ const BookingRooms = ({ room }) => {
   ];
   const getHour = (time) => Number(time.split(":")[0]);
 
+  const getSelectedTime = (key) => (key == null ? "" : String(key));
+
   const { data: session } = useSession();
   const user = session?.user;
   const router = useRouter();
@@ -52,21 +54,16 @@ const BookingRooms = ({ room }) => {
   const [specialNote, setSpecialNote] = useState("");
   const [date, setDate] = useState(null);
 
+  const bookedHours = useMemo(() => {
+    if (!startTime || !endTime) return 0;
+    const hours = getHour(endTime) - getHour(startTime);
+    return hours > 0 ? hours : 0;
+  }, [startTime, endTime]);
+
   const totalPrice = useMemo(() => {
-    if (!startTime || !endTime || !price) return 0;
-
-    const [sh, sm] = startTime.split(":").map(Number);
-    const [eh, em] = endTime.split(":").map(Number);
-
-    const startMinutes = sh * 60 + sm;
-    const endMinutes = eh * 60 + em;
-
-    const diff = endMinutes - startMinutes;
-
-    if (diff <= 0) return 0;
-
-    return (diff / 60) * Number(price);
-  }, [startTime, endTime, price]);
+    if (!bookedHours || !price) return 0;
+    return bookedHours * Number(price);
+  }, [bookedHours, price]);
 
   const handleBooking = async () => {
     const bookingData = {
@@ -182,10 +179,9 @@ const BookingRooms = ({ room }) => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <Select
-                        selectedKeys={startTime ? [startTime] : []}
-                        onSelectionChange={(keys) => {
-                          const value = String(Array.from(keys)[0] || "");
-                          setStartTime(value);
+                        selectedKey={startTime || null}
+                        onSelectionChange={(key) => {
+                          setStartTime(getSelectedTime(key));
                           setEndTime("");
                         }}
                         isRequired
@@ -212,10 +208,9 @@ const BookingRooms = ({ room }) => {
                       </Select>
 
                       <Select
-                        selectedKeys={endTime ? [endTime] : []}
-                        onSelectionChange={(keys) => {
-                          const value = String(Array.from(keys)[0] || "");
-                          setEndTime(value);
+                        selectedKey={endTime || null}
+                        onSelectionChange={(key) => {
+                          setEndTime(getSelectedTime(key));
                         }}
                         isRequired
                         name="endTime"
@@ -251,9 +246,14 @@ const BookingRooms = ({ room }) => {
                       <span className="text-xs font-bold uppercase text-[#072AC8] dark:text-blue-400">
                         Total Cost
                       </span>
-                      <p className="text-3xl font-extrabold text-[#072AC8] dark:text-blue-400">
-                        ${totalPrice || price}
-                      </p>
+                      <div className="text-right">
+                        <p className="text-3xl font-extrabold text-[#072AC8] dark:text-blue-400">
+                          $
+                          {bookedHours > 0
+                            ? totalPrice.toFixed(2)
+                            : Number(price).toFixed(2)}
+                        </p>
+                      </div>
                     </div>
 
                     <TextField name="specialNote">
@@ -271,8 +271,8 @@ const BookingRooms = ({ room }) => {
 
                     <Separator className="my-6" />
 
-                    <div className="flex items-center justify-end gap-4">
-                      <Modal.Footer>
+                    <div className="flex items-center justify-end gap-4 w-full">
+                      <Modal.Footer className="w-full flex justify-end gap-2">
                         <Button
                           slot="close"
                           variant="secondary"

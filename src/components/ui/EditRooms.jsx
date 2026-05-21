@@ -176,7 +176,7 @@ const EditRooms = ({ room }) => {
                         onChange={setSelectedAmenities}
                         className="mt-2"
                       >
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <div className="grid sm:grid-cols-2 gap-3">
                           {[
                             "Whiteboard",
                             "Projector",
@@ -185,7 +185,11 @@ const EditRooms = ({ room }) => {
                             "Quiet Zone",
                             "Air Conditioning",
                           ].map((item) => (
-                            <Checkbox key={item} value={item}>
+                            <Checkbox
+                              key={item}
+                              value={item}
+                              className="p-2 rounded-xl shadow-sm border border-slate-200 dark:border-zinc-700 hover:bg-slate-50 dark:hover:bg-zinc-800/50"
+                            >
                               <Checkbox.Control>
                                 <Checkbox.Indicator />
                               </Checkbox.Control>

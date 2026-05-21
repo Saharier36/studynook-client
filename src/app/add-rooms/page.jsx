@@ -143,7 +143,11 @@ const AddRoomsPage = () => {
                   "Quiet Zone",
                   "Air Conditioning",
                 ].map((item) => (
-                  <Checkbox key={item} value={item}>
+                  <Checkbox
+                    key={item}
+                    value={item}
+                    className="p-2 rounded-xl shadow-sm border border-slate-200 dark:border-zinc-700 hover:bg-slate-50 dark:hover:bg-zinc-800/50"
+                  >
                     <Checkbox.Control>
                       <Checkbox.Indicator />
                     </Checkbox.Control>

@@ -6,6 +6,11 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import RoomCards from "@/components/ui/RoomCards";
 
+export const metadata = {
+  title: "StudyNook - My Listings",
+  description: "Book your perfect study space easily",
+};
+
 const MyListingPage = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
   const userId = session?.user?.id;

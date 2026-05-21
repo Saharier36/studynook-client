@@ -3,6 +3,11 @@ import { Button,} from "@heroui/react";
 import { fetchRooms } from "@/service/api";
 import RoomCards from "@/components/ui/RoomCards";
 
+export const metadata = {
+  title: "StudyNook - Available Rooms",
+  description: "Book your perfect study space easily",
+};
+
 const RoomsPage = async () => {
   const rooms = await fetchRooms();
 

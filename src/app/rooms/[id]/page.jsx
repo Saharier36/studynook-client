@@ -21,6 +21,10 @@ import { headers } from "next/headers";
 import EditRooms from "@/components/ui/EditRooms";
 import DeleteRooms from "@/components/ui/DeleteRooms";
 import BookingRooms from "@/components/ui/BookingRooms";
+export const metadata = {
+  title: "StudyNook - Room Details",
+  description: "Book your perfect study space easily",
+};
 
 const RoomDetails = async ({ params }) => {
   const { id } = await params;

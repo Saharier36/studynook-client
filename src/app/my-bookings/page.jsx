@@ -136,7 +136,8 @@ const MyBookings = () => {
                   </Table.Cell>
 
                   <Table.Cell>
-                    {booking.status === "confirmed" ? (
+                    {booking.status === "confirmed"  &&
+                    new Date(booking.date) > new Date() ? (
                       <CancelBooking
                         onConfirm={() => handleCancel(booking._id)}
                       />

@@ -7,26 +7,26 @@ import localFont from "next/font/local";
 
 const technor = localFont({
   src: [
-    { path: "../../fonts/Technor-Extralight.woff2", weight: "200" },
-    { path: "../../fonts/Technor-Light.woff2", weight: "300" },
-    { path: "../../fonts/Technor-Regular.woff2", weight: "400" },
-    { path: "../../fonts/Technor-Medium.woff2", weight: "500" },
-    { path: "../../fonts/Technor-Semibold.woff2", weight: "600" },
-    { path: "../../fonts/Technor-Bold.woff2", weight: "700" },
-    { path: "../../fonts/Technor-Black.woff2", weight: "900" },
+    { path: "../fonts/Technor-Extralight.woff2", weight: "200" },
+    { path: "../fonts/Technor-Light.woff2", weight: "300" },
+    { path: "../fonts/Technor-Regular.woff2", weight: "400" },
+    { path: "../fonts/Technor-Medium.woff2", weight: "500" },
+    { path: "../fonts/Technor-Semibold.woff2", weight: "600" },
+    { path: "../fonts/Technor-Bold.woff2", weight: "700" },
+    { path: "../fonts/Technor-Black.woff2", weight: "900" },
   ],
   variable: "--font-technor",
 });
 
 const supreme = localFont({
   src: [
-    { path: "../../fonts/Supreme-Thin.woff2", weight: "100" },
-    { path: "../../fonts/Supreme-Extralight.woff2", weight: "200" },
-    { path: "../../fonts/Supreme-Light.woff2", weight: "300" },
-    { path: "../../fonts/Supreme-Regular.woff2", weight: "400" },
-    { path: "../../fonts/Supreme-Medium.woff2", weight: "500" },
-    { path: "../../fonts/Supreme-Bold.woff2", weight: "700" },
-    { path: "../../fonts/Supreme-Extrabold.woff2", weight: "800" },
+    { path: "../fonts/Supreme-Thin.woff2", weight: "100" },
+    { path: "../fonts/Supreme-Extralight.woff2", weight: "200" },
+    { path: "../fonts/Supreme-Light.woff2", weight: "300" },
+    { path: "../fonts/Supreme-Regular.woff2", weight: "400" },
+    { path: "../fonts/Supreme-Medium.woff2", weight: "500" },
+    { path: "../fonts/Supreme-Bold.woff2", weight: "700" },
+    { path: "../fonts/Supreme-Extrabold.woff2", weight: "800" },
   ],
   variable: "--font-supreme",
 });

@@ -18,11 +18,12 @@ export const featuredRooms = async () => {
   return data || [];
 };
 
-export const addRooms = async (roomData) => {
+export const addRooms = async (roomData, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/rooms`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(roomData),
   });
@@ -30,11 +31,12 @@ export const addRooms = async (roomData) => {
   return data;
 };
 
-export const updateRoom = async (_id, roomData) => {
+export const updateRoom = async (_id, roomData, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/rooms/${_id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(roomData),
   });
@@ -42,22 +44,24 @@ export const updateRoom = async (_id, roomData) => {
   return data;
 };
 
-export const deleteRoom = async (_id) => {
+export const deleteRoom = async (_id, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/rooms/${_id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
   });
   const data = await res.json();
   return data;
 };
 
-export const bookings = async (bookingData) => {
+export const bookings = async (bookingData, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/booking`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(bookingData),
   });
@@ -72,23 +76,29 @@ export const getBookings = async (userId) => {
   return data;
 };
 
-export const cancelBooking = async (bookingId, userId) => {
+export const cancelBooking = async (bookingId, userId, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/booking/${bookingId}/cancel`,
     {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({ userId }),
     },
   );
   return res;
 };
 
-export const getMyListings = async (userId) => {
+export const getMyListings = async (userId, token) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/my-listings?userId=${userId}`,
     {
       cache: "no-store",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
   );
 

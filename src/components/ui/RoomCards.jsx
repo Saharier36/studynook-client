@@ -61,8 +61,10 @@ const RoomCards = ({ rooms }) => {
                     {title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-4 grow">
-                    {description}
+                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-4 grow wrap-break-words">
+                    {description && description.length > 100
+                      ? `${description.substring(0, 100)}...`
+                      : description}
                   </p>
 
                   <div className="flex flex-wrap gap-1.5 mb-5 items-center">

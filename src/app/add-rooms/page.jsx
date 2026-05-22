@@ -18,7 +18,7 @@ import { toast } from "sonner";
 import { ArrowLeft, Plus } from "@gravity-ui/icons";
 import Link from "next/link";
 import { addRooms } from "@/service/api";
-import { useSession } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 
 const AddRoomsPage = () => {
   const router = useRouter();
@@ -37,7 +37,10 @@ const AddRoomsPage = () => {
     const { id, name, email, image } = session?.user || {};
     roomData.owner = { id, name, email, image };
 
-    const result = await addRooms(roomData);
+    const { data } = await authClient.token();
+    const token = data?.token;
+
+    const result = await addRooms(roomData, token);
     if (result) {
       toast.success("Room added successfully");
       router.push("/my-listings");

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Chip, EmptyState, Table } from "@heroui/react";
 import Image from "next/image";
 import { toast } from "sonner";
-import { useSession } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import { cancelBooking, getBookings } from "@/service/api";
 import CancelBooking from "@/components/ui/CancelBooking";
 
@@ -21,7 +21,10 @@ const MyBookings = () => {
   }, [user]);
 
   const handleCancel = async (id) => {
-    const res = await cancelBooking(id, user.id);
+     const { data } = await authClient.token();
+     const token = data?.token;
+     console.log(data?.token);
+    const res = await cancelBooking(id, user.id, token);
 
     if (res.ok) {
       toast.success("Booking cancelled");

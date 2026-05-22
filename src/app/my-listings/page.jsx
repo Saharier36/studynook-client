@@ -15,7 +15,9 @@ const MyListingPage = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
   const userId = session?.user?.id;
 
-  const rooms = userId ? await getMyListings(userId) : [];
+  const {token} = await auth.api.getToken({ headers: await headers() });
+  const rooms = userId ? await getMyListings(userId, token) : [];
+
 
   return (
     <div className="min-h-screen container mx-auto py-10 px-4 sm:px-6 lg:px-8">

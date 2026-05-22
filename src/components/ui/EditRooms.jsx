@@ -19,6 +19,7 @@ import {
   TextArea,
   TextField,
 } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
 
 const EditRooms = ({ room }) => {
   const router = useRouter();
@@ -35,7 +36,11 @@ const EditRooms = ({ room }) => {
     const roomData = Object.fromEntries(formData.entries());
     roomData.amenities = selectedAmenities;
 
-    const result = await updateRoom(_id, roomData);
+    const { data } = await authClient.token();
+    const token = data?.token;
+
+
+    const result = await updateRoom(_id, roomData, token);
     if (result) {
       toast.success("Room updated successfully");
       router.refresh();

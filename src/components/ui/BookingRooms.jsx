@@ -18,7 +18,7 @@ import {
   Select,
 } from "@heroui/react";
 import { ChevronDown } from "@gravity-ui/icons";
-import { useSession } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import { bookings } from "@/service/api";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -81,7 +81,9 @@ const BookingRooms = ({ room }) => {
       specialNote,
     };
 
-    const res = await bookings(bookingData);
+    const { data } = await authClient.token();
+    const token = data?.token;
+    const res = await bookings(bookingData, token);
 
     if (res.status === 409) {
       toast.error(

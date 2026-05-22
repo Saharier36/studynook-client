@@ -4,6 +4,7 @@ import { AlertDialog, Button } from "@heroui/react";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { authClient } from "@/lib/auth-client";
 
 const DeleteRooms = ({ room }) => {
   const router = useRouter();
@@ -12,7 +13,11 @@ const DeleteRooms = ({ room }) => {
   const handleDelete = async () => {
     setIsDeleting(true);
 
-    const res = await deleteRoom(room._id);
+     
+  const { data } = await authClient.token();
+  const token = data?.token;
+
+    const res = await deleteRoom(room._id, token);
     if (res) {
       toast.success("Room deleted successfully");
       router.push("/my-listings");

@@ -10,7 +10,7 @@ const LoadingPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-zinc-950 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="relative w-14 h-14 flex items-center justify-center mb-6">
         <motion.div
           className="absolute w-full h-full border-[3px] border-transparent border-t-[#072AC8] dark:border-t-[#1E96FC] border-b-[#072AC8]/20 dark:border-b-[#1E96FC]/20 rounded-full"

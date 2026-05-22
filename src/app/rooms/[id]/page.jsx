@@ -55,7 +55,7 @@ const RoomDetails = async ({ params }) => {
         <Image src={image} alt={title} fill priority className="object-cover" />
         <div className="absolute top-28 left-6 z-20">
           <Link href="/rooms">
-            <Button className="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25">
+            <Button size="sm" className="bg-[#072AC8] hover:bg-blue-500">
               <FaArrowLeft className="size-3" />
               Back to Rooms
             </Button>

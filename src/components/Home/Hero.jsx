@@ -44,7 +44,7 @@ const Hero = () => {
             <Link href="/rooms">
               <Button
                 size="lg"
-                className="bg-[#FCF300] hover:bg-[#FFC600] text-[#072AC8] font-extrabold px-8 py-6 shadow-lg shadow-[#FCF300]/10"
+                className="bg-[#072AC8] hover:bg-blue-500 font-extrabold px-8 py-6 shadow-lg shadow-[#FCF300]/10"
               >
                 Explore Rooms
               </Button>
@@ -53,7 +53,7 @@ const Hero = () => {
             <Link href="/add-rooms">
               <Button
                 size="lg"
-                className="bg-white/5 hover:bg-white/10 font-extrabold px-8 py-6 text-base border border-[#A2D6F9]/30 backdrop-blur rounded-lg"
+                className="bg-white/5 hover:bg-white/10 font-extrabold px-8 py-6 text-base border border-[#A2D6F9]/30 backdrop-blur rounded-xl"
               >
                 List Your Room
               </Button>

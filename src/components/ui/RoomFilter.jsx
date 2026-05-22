@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Label, SearchField, Checkbox } from "@heroui/react";
+import { Label, SearchField, Checkbox, Pagination } from "@heroui/react";
 import { fetchRooms } from "@/service/api";
 import RoomCards from "@/components/ui/RoomCards";
 import Link from "next/link";
@@ -21,10 +21,14 @@ const RoomFilter = ({ initialRooms }) => {
   const [selectedAmenities, setSelectedAmenities] = useState([]);
   const [rooms, setRooms] = useState(initialRooms);
 
+  const [page, setPage] = useState(1);
+  const itemsParPage = 6;
+
   useEffect(() => {
     const timer = setTimeout(async () => {
       const data = await fetchRooms(search, selectedAmenities);
       setRooms(data);
+      setPage(1);
     }, 400);
 
     return () => clearTimeout(timer);
@@ -38,10 +42,14 @@ const RoomFilter = ({ initialRooms }) => {
     );
   };
 
+  const totalPages = Math.ceil(rooms.length / itemsParPage);
+  const startIndex = (page - 1) * itemsParPage;
+  const endIndex = startIndex + itemsParPage;
+  const displayedRooms = rooms.slice(startIndex, endIndex);
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
-   
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-wrap gap-2">
           {AMENITIES.map((amenity) => (
             <Checkbox
@@ -92,7 +100,50 @@ const RoomFilter = ({ initialRooms }) => {
           </Link>
         </div>
       ) : (
-        <RoomCards rooms={rooms} />
+        <div className="space-y-8">
+          <RoomCards rooms={displayedRooms} />
+
+          {totalPages > 1 && (
+            <div className="mt-8 flex justify-center">
+              <Pagination className="justify-center">
+                <Pagination.Content>
+                  <Pagination.Item>
+                    <Pagination.Previous
+                      isDisabled={page === 1}
+                      onPress={() => setPage((p) => p - 1)}
+                    >
+                      <Pagination.PreviousIcon />
+                      <span>Previous</span>
+                    </Pagination.Previous>
+                  </Pagination.Item>
+
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (p) => (
+                      <Pagination.Item key={p}>
+                        <Pagination.Link
+                          isActive={p === page}
+                          onPress={() => setPage(p)}
+                        >
+                          {p}
+                        </Pagination.Link>
+                      </Pagination.Item>
+                    ),
+                  )}
+
+                  <Pagination.Item>
+                    <Pagination.Next
+                      isDisabled={page === totalPages}
+                      onPress={() => setPage((p) => p + 1)}
+                    >
+                      <span>Next</span>
+                      <Pagination.NextIcon />
+                    </Pagination.Next>
+                  </Pagination.Item>
+                </Pagination.Content>
+              </Pagination>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

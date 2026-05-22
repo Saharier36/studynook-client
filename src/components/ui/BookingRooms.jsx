@@ -49,6 +49,7 @@ const BookingRooms = ({ room }) => {
   const user = session?.user;
   const router = useRouter();
 
+  const [isOpen, setIsOpen] = useState(false);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [specialNote, setSpecialNote] = useState("");
@@ -92,13 +93,17 @@ const BookingRooms = ({ room }) => {
       return;
     }
     toast.success("Room booked successfully!");
+    setIsOpen(false);
     router.refresh();
   };
 
   return (
     <div>
-      <Modal>
-        <Button className="w-full bg-[#072AC8] hover:bg-[#1E96FC] text-white font-extrabold py-6 rounded-xl">
+      <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
+        <Button
+          onPress={() => setIsOpen(true)}
+          className="w-full bg-[#072AC8] hover:bg-[#1E96FC] text-white font-extrabold py-6 rounded-xl"
+        >
           Book This Nook
         </Button>
 

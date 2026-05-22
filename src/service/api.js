@@ -1,5 +1,15 @@
-export const fetchRooms = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/rooms`);
+export const fetchRooms = async (search = "", amenities = []) => {
+  const params = new URLSearchParams();
+
+  if (search) params.set("search", search);
+  if (amenities.length > 0) params.set("amenities", amenities.join(","));
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/rooms?${params}`,
+    {
+      cache: "no-store",
+    },
+  );
   const data = await res.json();
   return data || [];
 };

@@ -21,9 +21,9 @@ const MyBookings = () => {
   }, [user]);
 
   const handleCancel = async (id) => {
-     const { data } = await authClient.token();
-     const token = data?.token;
-     console.log(data?.token);
+    const { data } = await authClient.token();
+    const token = data?.token;
+    console.log(data?.token);
     const res = await cancelBooking(id, user.id, token);
 
     if (res.ok) {
@@ -40,8 +40,7 @@ const MyBookings = () => {
     <div className="max-w-6xl mx-auto px-4 py-10">
       <div className="mb-8 space-y-2">
         <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl">
-          My{" "}
-          <span className="text-[#072AC8] dark:text-blue-400">Bookings</span>
+          My <span className="text-[#072AC8] dark:text-blue-400">Bookings</span>
         </h1>
         <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 font-medium">
           View and manage all your upcoming and past study room reservations.
@@ -139,8 +138,7 @@ const MyBookings = () => {
                   </Table.Cell>
 
                   <Table.Cell>
-                    {booking.status === "confirmed"  &&
-                    new Date(booking.date) > new Date() ? (
+                    {booking.status === "confirmed" ? (
                       <CancelBooking
                         onConfirm={() => handleCancel(booking._id)}
                       />

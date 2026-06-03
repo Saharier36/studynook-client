@@ -1,63 +1,82 @@
-# StudyNook
+# 📚 StudyNook
 
-A polished student booking platform built with Next.js for discovering, reserving, and managing quiet study rooms.
+> A polished student booking platform built with Next.js for discovering, reserving, and managing quiet study rooms.
 
-- 🌐 Live Demo: https://studynook-zeta.vercel.app/
-- 🔗 Source Code: https://github.com/Saharier36/studynook-client
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-studynook--zeta.vercel.app-1D9E75?style=for-the-badge)](https://studynook-zeta.vercel.app/)
+[![Source Code](https://img.shields.io/badge/🔗_Source_Code-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/Saharier36/studynook-client)
 
-## What is StudyNook?
+---
+
+## ✨ What is StudyNook?
 
 StudyNook helps students find the right study space, book it instantly, and manage their reservations from one clean dashboard. It includes room listings, secure authentication, booking controls, and room ownership tools.
 
-## Highlights
+---
 
-- ✨ Beautiful landing page with featured rooms and testimonials
-- 🔍 Browse study rooms with filters and detailed info
-- 🔐 Email/password + Google sign-in
-- 🧾 Booking flow with My Bookings and cancellation support
-- 🏠 Add, edit, and remove your own room listings
-- 🌙 Light/dark theme mode
-- 📱 Fully responsive for mobile, tablet, and desktop
+## 🚀 Highlights
 
-## Tech Stack
+| Feature | Description |
+|--------|-------------|
+| 🏠 Landing Page | Beautiful hero section with featured rooms and testimonials |
+| 🔍 Room Browser | Browse study rooms with filters and detailed info |
+| 🔐 Authentication | Email/password + Google sign-in via Better Auth |
+| 🧾 Booking Flow | My Bookings dashboard with cancellation support |
+| 🏷️ Room Management | Add, edit, and remove your own room listings |
+| 🌙 Theming | Light/dark mode fully supported |
+| 📱 Responsive | Optimized for mobile, tablet, and desktop |
 
-- **Next.js 16**
-- **React 19**
-- **Tailwind CSS v4**
-- **HeroUI**
-- **Framer Motion**
-- **Better Auth**
-- **MongoDB**
-- **Gravity UI Icons + React Icons**
-- **Sonner** notifications
+---
 
-## Pages
+## 🛠️ Tech Stack
 
-### Public Pages
+| Category | Technology |
+|----------|-----------|
+| Framework | Next.js 16 |
+| UI Library | React 19 |
+| Styling | Tailwind CSS v4, HeroUI |
+| Animation | Framer Motion |
+| Auth | Better Auth |
+| Database | MongoDB |
+| Notifications | Sonner |
+| Icons | Gravity UI Icons, React Icons |
 
-- `/` — homepage with hero, featured rooms, overview cards, and testimonials
-- `/rooms` — browse available study rooms
-- `/rooms/[id]` — room details and booking page
-- `/login` — sign in page
-- `/sign-up` — register a new account
+---
 
-### Protected Pages
+## 📄 Pages
 
-- `/add-rooms` — add a new study room
-- `/my-listings` — manage your listed rooms
-- `/my-bookings` — review and cancel bookings
+### 🌐 Public Pages
 
-## User Flows
+| Route | Description |
+|-------|-------------|
+| `/` | Homepage — hero, featured rooms, overview cards, testimonials |
+| `/rooms` | Browse all available study rooms |
+| `/rooms/[id]` | Room details and booking page |
+| `/login` | Sign in page |
+| `/sign-up` | Register a new account |
 
-- Discover rooms from the homepage or room list
-- View full room details and availability
-- Book a room after signing in
-- Cancel bookings from **My Bookings**
-- Add, edit, and delete your own listings
+### 🔒 Protected Pages
 
-## Environment Variables
+| Route | Description |
+|-------|-------------|
+| `/add-rooms` | Add a new study room |
+| `/my-listings` | Manage your listed rooms |
+| `/my-bookings` | Review and cancel bookings |
 
-Create a `.env` file with the following variables:
+---
+
+## 🔄 User Flows
+
+1. **Discover** rooms from the homepage or room list
+2. **View** full room details and availability
+3. **Book** a room after signing in
+4. **Cancel** bookings from My Bookings
+5. **Manage** your own listings — add, edit, and delete
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env` file in the root with the following:
 
 ```env
 NEXT_PUBLIC_API_URL=your_backend_api_url
@@ -67,38 +86,40 @@ GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
 ```
 
-## Getting Started
+---
 
-### Install dependencies
+## 🏁 Getting Started
+
+### 1. Install dependencies
 
 ```bash
 npm install
 ```
 
-### Run locally
+### 2. Run locally
 
 ```bash
 npm run dev
 ```
 
-Then open:
+Then open: [http://localhost:3000](http://localhost:3000)
 
-```bash
-http://localhost:3000
+---
+
+## 📦 Available Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run start` | Run production server |
+| `npm run lint` | Run ESLint |
+
+---
+
+## 📁 Project Structure
+
 ```
-
-## Available Scripts
-
-```bash
-npm run dev     # Start development server
-npm run build   # Build for production
-npm run start   # Run production server
-npm run lint    # Run ESLint
-```
-
-## Project Structure
-
-```bash
 src/
 ├── app/
 │   ├── (auth)/
@@ -127,6 +148,6 @@ src/
 └── fonts/
 ```
 
-## Notes
+---
 
-StudyNook is built with a modern UI focus, offering smooth animations, easy booking, and a strong mobile experience.
+> StudyNook is built with a modern UI focus, offering smooth animations, easy booking, and a strong mobile experience.

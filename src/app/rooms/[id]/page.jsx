@@ -193,18 +193,17 @@ const RoomDetails = async ({ params }) => {
                   </div>
                 </div>
 
-                {isOwner ||
-                  (isLoggedIn && (
-                    <div className="space-y-3.5">
-                      <span className="text-md font-extrabold uppercase text-slate-400 dark:text-slate-500 block">
-                        Admin Space Controls
-                      </span>
-                      <div className="flex items-center gap-4">
-                        <EditRooms room={room} />
-                        <DeleteRooms room={room} />
-                      </div>
+                {isOwner && isLoggedIn && (
+                  <div className="space-y-3.5">
+                    <span className="text-md font-extrabold uppercase text-slate-400 dark:text-slate-500 block">
+                      Admin Space Controls
+                    </span>
+                    <div className="flex items-center gap-4">
+                      <EditRooms room={room} />
+                      <DeleteRooms room={room} />
                     </div>
-                  ))}
+                  </div>
+                )}
               </div>
             </div>
           </Card>
